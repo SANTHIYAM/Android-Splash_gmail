@@ -12,12 +12,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 
-public class MainActivity extends AppCompatActivity{
+public class GoogleLogin extends AppCompatActivity{
 
     int RC_SIGN_IN=0;
     SignInButton signInButton;
@@ -72,14 +71,14 @@ public class MainActivity extends AppCompatActivity{
         {
             GoogleSignInAccount account=completedTask.getResult(ApiException.class);
             //Signed in successfully, show authenticated UI
-            startActivity(new Intent(MainActivity.this,Main2Activity.class));
+            startActivity(new Intent(GoogleLogin.this, UserDetails.class));
         }
         catch (ApiException e)
         {
             // The ApiException status code indicates the detailed failure reason
             //PLease refer the GoogleSignInStatusCode class reference for more information.
             Log.w("Google Sign in Error","signInResult:failed code"+e.getStatusCode());
-            Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_LONG).show();
+            Toast.makeText(GoogleLogin.this,"Failed",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity{
         GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(this);
         if(account!=null)
         {
-            startActivity(new Intent(MainActivity.this,Main2Activity.class));
+            startActivity(new Intent(GoogleLogin.this, UserDetails.class));
         }
         super.onStart();
     }
