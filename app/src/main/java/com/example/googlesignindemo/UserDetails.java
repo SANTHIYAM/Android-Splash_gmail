@@ -16,13 +16,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import org.w3c.dom.Text;
-
-public class Main2Activity extends AppCompatActivity {
+public class UserDetails extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
     Button sign_out;
@@ -39,7 +36,7 @@ public class Main2Activity extends AppCompatActivity {
         sign_out = findViewById(R.id.log_out);
         nameTV = findViewById(R.id.name);
         emailTV = findViewById(R.id.email);
-        idTV = findViewById(R.id.id);
+        //idTV = findViewById(R.id.id);
         photoIV = findViewById(R.id.photo);
 
 
@@ -52,7 +49,7 @@ public class Main2Activity extends AppCompatActivity {
         //Build a GoogleSignInClient with the options specified by gso
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Main2Activity.this);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(UserDetails.this);
         if (acct != null) {
             String personName = acct.getDisplayName();
             String personGivenName = acct.getGivenName();
@@ -63,7 +60,7 @@ public class Main2Activity extends AppCompatActivity {
 
             nameTV.setText("Name" + personName);
             emailTV.setText("Email " + personEmail);
-            idTV.setText("ID" + personId);
+            //idTV.setText("ID" + personId);
             Glide.with(this).load(personPhoto).into(photoIV);
 
         }
@@ -77,8 +74,8 @@ public class Main2Activity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(Main2Activity.this, "Successfully signed out", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Main2Activity.this, MainActivity.class));
+                        Toast.makeText(UserDetails.this, "Successfully signed out", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(UserDetails.this, GoogleLogin.class));
                         finish();
                     }
                 });
